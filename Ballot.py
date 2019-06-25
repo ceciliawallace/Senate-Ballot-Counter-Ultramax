@@ -25,8 +25,3 @@ class Ballot:
 
         else:
             "tried to remove pref from empty list"
-
-
-
-
-
