@@ -3,6 +3,7 @@ This is the main doc.
 '''
 import sys
 import Ballot
+import csv
 
 #Spreadsheet should be formatted as:
 #column1=timestamp, column2=Tnumber; all following columns are preferences
