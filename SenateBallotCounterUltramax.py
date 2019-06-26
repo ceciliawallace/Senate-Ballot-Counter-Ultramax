@@ -1,10 +1,34 @@
 '''
 This is the main doc.
 '''
+import sys
+import Ballot
 
+#Spreadsheet should be formatted as:
+#column1=timestamp, column2=Tnumber; all following columns are preferences
+#converts spreadsheet into objects
+#returns number of votes cast
+#FILE MUST BE A CSV
+def intakeSpreadsheet(filename):
+    allBallots = []
+    with open(filename, 'r') as f:
+        readCSV = csv.reader(f, delimiter=',')
+        next(readCSV)
+        for row in readCSV:
+            #make a new ballot object
+            timeStamp = row[0] #TimeStamp is always the first column
+            tNumber = row[1] #TNumber should always be the second column in the spreadsheet
+            currentBallot = Ballot.Ballot(timeStamp, tNumber)
+            #if the preference is empty, will be empty string
+            preferences = []
+            for column in row[2:]:
+                if column.strip() != '':
+                    preferences.append(column)
+            currentBallot.changeTopChoice(preferences[0])
+            currentBallot.preferences = preferences
+            allBallots.append(currentBallot)
 
-
-def intakeSpreadsheet():
+    return allBallots
 
 def checkDoubleBallots(allBallots):
     for i in allBallots:
@@ -48,7 +72,8 @@ def tallyScoreCard():
             scorecard[ballot.preferences[0]] = 1
 
 def main():
-    allBallots = []
+    file = sys.argv[1]
+    allBallots = intakeSpreadsheet(file)
     scoreCard = {}  #name:numVotes  keeps track of candidates and how many votes they have
     numSeats = 15  #actually this needs to be input on command line
     threshold = 0
