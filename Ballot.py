@@ -16,12 +16,20 @@ class Ballot:
         self.topChoice = ""
 
     def changeTopChoice(self, newTopChoice):
-        self.changeTopChoice = newTopChoice
+        self.topChoice = newTopChoice
 
     def popPreference(self):
         if len(self.preferences) != 0:
             newTopChoice = self.preferences.pop(0) #pop the 0th index off of our preference list
             changeTopChoice(newTopChoice)
 
+            if len(self.preferences) == 0:
+                return False #ok so if we empty list return False??
+            else:
+                return True
+
         else:
             "tried to remove pref from empty list"
+
+    def addPreference(self, candidateName):
+        self.preferences.append(candidateName)
