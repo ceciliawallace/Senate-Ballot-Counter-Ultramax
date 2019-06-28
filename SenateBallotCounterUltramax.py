@@ -1,5 +1,5 @@
 '''
-This is the main doc.
+This is the main doc
 '''
 import sys
 import Ballot
